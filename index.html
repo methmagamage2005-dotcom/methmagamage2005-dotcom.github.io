@@ -3,116 +3,497 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Academic e-Portfolio</title>
+    <title>Methma Sithmini Senanayake | Academic e-Portfolio</title>
     <style>
+        :root {
+            --primary-color: #1b4332;
+            --secondary-color: #2d6a4f;
+            --accent-color: #52b788;
+            --light-bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #212529;
+            --text-muted: #6c757d;
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f7f6;
-            color: #333;
+            background-color: var(--light-bg);
+            color: var(--text-main);
+            line-height: 1.6;
         }
+
+        /* Sticky Navigation Bar */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: var(--primary-color);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        nav .logo {
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: #d8f3dc;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Hero Header */
         header {
-            background-color: #1b4332;
+            background: linear-gradient(135deg, #081c15 0%, var(--primary-color) 100%);
             color: white;
             text-align: center;
-            padding: 2rem 1rem;
+            padding: 4rem 1.5rem 3rem;
         }
+
         header h1 {
             margin: 0;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
+
         header p {
-            margin-top: 0.5rem;
-            font-size: 1.1rem;
-            color: #d8f3dc;
+            margin-top: 0.8rem;
+            font-size: 1.2rem;
+            color: #b7e4c7;
+            font-weight: 300;
         }
+
+        /* Layout Container */
         .container {
-            max-width: 800px;
-            margin: 2rem auto;
+            max-width: 1100px;
+            margin: 2.5rem auto;
             padding: 0 1.5rem;
         }
-        section {
-            background: white;
-            padding: 1.5rem 2rem;
+
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        h2.section-title {
+            color: var(--primary-color);
+            font-size: 1.75rem;
+            margin-top: 0;
             margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 0.5rem;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .about-content p {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        /* Education Timeline */
+        .timeline-item {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .timeline-item h3 {
+            margin: 0 0 0.3rem 0;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        .timeline-item .institution {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .timeline-item .details {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Projects Grid Cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: #fafafa;
+            border: 1px solid #e9ecef;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        h2 {
-            color: #2d6a4f;
-            border-bottom: 2px solid #52b788;
-            padding-bottom: 0.3rem;
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
-        ul {
-            padding-left: 1.2rem;
+
+        .project-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.15rem;
         }
-        li {
-            margin-bottom: 0.5rem;
+
+        .project-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
         }
+
+        /* Skill Progress Bars */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-group h3 {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            background-color: #e9ecef;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background-color: var(--secondary-color);
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        /* Resume Download Button */
+        .btn-download {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            transition: background-color 0.3s;
+        }
+
+        .btn-download:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Contact Details Grid */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .contact-box {
+            background: #f1f8f5;
+            padding: 1.2rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .contact-box h4 {
+            margin: 0 0 0.4rem 0;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+        }
+
+        .contact-box a, .contact-box p {
+            margin: 0;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            word-break: break-word;
+        }
+
+        .contact-box a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
-            padding: 1.5rem;
+            padding: 2rem;
             background-color: #081c15;
-            color: white;
+            color: #b7e4c7;
             font-size: 0.9rem;
-            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .profile-photo {
+                width: 180px;
+                height: 220px;
+                margin: 0 auto;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#" class="logo">Methma Sithmini</a>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header / Banner -->
     <header>
-        <h1>Welcome to My e-Portfolio</h1>
-        <p>BSc (Hons) in Biotechnology Student | SLIIT</p>
+        <h1>Aparakka Gamage Methma Sithmini Senanayake</h1>
+        <p>BSc (Hons) in Biotechnology Undergraduate | SLIIT</p>
     </header>
 
     <div class="container">
-        
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Hello! I am an undergraduate student pursuing a Bachelor of Science Honors degree in Biotechnology at Sri Lanka Institute of Information Technology (SLIIT). I have a strong passion for biological sciences, analytical techniques, and information technology applications in modern science.</p>
+
+        <!-- About Me Section -->
+        <section id="about" class="section-card">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <img src="me.jpeg" alt="Methma Sithmini Senanayake" class="profile-photo">
+                <div class="about-content">
+                    <p><strong>Hi, I'm Methma Sithmini Senanayake!</strong></p>
+                    <p>I am an enthusiastic first-year Biotechnology undergraduate (Year 1, Semester 1) with a strong passion for exploring the microscopic world and leveraging biological systems to solve real-world problems. With a solid foundation in biological sciences, I enjoy combining scientific curiosity with creativity, whether it's through research, academic debates, or digital content creation. I am always eager to learn, collaborate, and contribute to innovative advancements in the field of modern biotechnology.</p>
+                </div>
+            </div>
         </section>
 
-        <section id="education">
-            <h2>Education</h2>
-            <ul>
-                <li><strong>BSc (Hons) in Biotechnology</strong> — Sri Lanka Institute of Information Technology (SLIIT)</li>
-                <li><strong>G.C.E. Advanced Level</strong> — Biology Stream</li>
-            </ul>
+        <!-- Educational Qualifications Section -->
+        <section id="education" class="section-card">
+            <h2 class="section-title">Educational Qualifications</h2>
+            
+            <div class="timeline-item">
+                <h3>Higher Education</h3>
+                <p class="institution">BSc (Hons) in Biotechnology (Undergraduate)</p>
+                <p class="details">Sri Lanka Institute of Information Technology (SLIIT) — Status: Year 1, Semester 1</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Secondary Education</h3>
+                <p class="institution">G.C.E. Advanced Level (G.C.E. A/L) — Biology Stream</p>
+                <p class="details">Results: Chemistry: B, Biology: C, Physics: C</p>
+            </div>
+
+            <div class="timeline-item">
+                <p class="institution">G.C.E. Ordinary Level (G.C.E. O/L)</p>
+                <p class="details">Results: 8 A's (including Mathematics & English), 1 B</p>
+            </div>
         </section>
 
-        <section id="academic-focus">
-            <h2>Academic Focus & Skills</h2>
-            <ul>
-                <li>Analytical Chemistry & Chromatography Techniques (HPLC, GC, Paper Chromatography)</li>
-                <li>Spectrophotometry & Mass Spectrometry</li>
-                <li>Biological Cell Systems & Molecular Biology</li>
-                <li>Basic Web Development & Markdown (SC1172 - Introduction to IT)</li>
-            </ul>
+        <!-- Projects & Key Work Section -->
+        <section id="projects" class="section-card">
+            <h2 class="section-title">Projects & Key Work</h2>
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <h3>1. Overview & Categories of Biotechnology</h3>
+                    <p>A comprehensive presentation covering the foundational concepts, scope, and key branches/categories of modern biotechnology.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>2. Future Career Trajectory in Biotechnology</h3>
+                    <p>An in-depth career path exploration highlighting future professional opportunities and emerging developments in the biotech industry.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>3. Synthetic Biology: Hazards & Biosecurity Dilemmas</h3>
+                    <p>Participated in an academic debate presenting structured arguments on biosecurity risks, dual-use dilemmas, and ethical concerns related to synthetic biology.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>4. New Biotech Product Video — PETase Enzyme Project</h3>
+                    <p>Conceptualized and edited a promotional/educational video explaining the application of PETase enzymes in breaking down plastic waste as an innovative biological solution.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>5. Academic Assessment Portfolio</h3>
+                    <p>Compiled a complete coursework portfolio integrating research assignments, presentations, reflection statements, and projects created throughout the semester.</p>
+                </div>
+
+            </div>
         </section>
 
-        <section id="projects">
-            <h2>Coursework & Projects</h2>
-            <ul>
-                <li><strong>GitHub Pages e-Portfolio:</strong> Designed and published a web portfolio as part of the Introduction to IT module.</li>
-                <li><strong>Biotechnology Portfolio:</strong> Academic exploration on Synthetic Biology, Grey Biotechnology applications, and PETase enzyme developments.</li>
-            </ul>
+        <!-- Skills Section -->
+        <section id="skills" class="section-card">
+            <h2 class="section-title">Technical & Professional Skills</h2>
+            <div class="skills-grid">
+                
+                <div class="skill-group">
+                    <h3>IT & Productivity Tools</h3>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>MS Word & Excel</span><span>90%</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 90%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>MS PowerPoint / Presentations</span><span>95%</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 95%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>HTML & Markdown Basics (SC1172)</span><span>85%</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Laboratory & Research Skills</h3>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Lab Techniques & Sample Preparation</span><span>85%</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Data Analysis & Technical Reporting</span><span>88%</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 88%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Digital Media & Communication</h3>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Video & Photo Editing</span><span>85%</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Academic Debate & Scientific Writing</span><span>90%</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 90%;"></div></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3 style="color: var(--secondary-color); font-size: 1.1rem; margin-bottom: 0.8rem;">Hobbies & Interests</h3>
+                <ul style="padding-left: 1.2rem; margin: 0;">
+                    <li>Swimming</li>
+                    <li>Singing (Especially 90s Sinhala Classics)</li>
+                </ul>
+            </div>
         </section>
 
-        <section id="contact">
-            <h2>Contact Information</h2>
-            <p>If you would like to connect or learn more about my work, feel free to reach out:</p>
-            <ul>
-                <li><strong>GitHub:</strong> <a href="https://github.com/methmagamage2005-dotcom" target="_blank">methmagamage2005-dotcom</a></li>
-            </ul>
+        <!-- Resume Download Section -->
+        <section id="resume" class="section-card" style="text-align: center;">
+            <h2 class="section-title">Downloadable Resume</h2>
+            <p style="margin-bottom: 1.5rem; color: var(--text-muted);">View or download my official curriculum vitae submitted for Practical 1 (PDF format):</p>
+            <a href="HS26510360_CV.pdf" target="_blank" class="btn-download">📄 Download Official Resume (PDF)</a>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section-card">
+            <h2 class="section-title">Contact Details</h2>
+            <div class="contact-info">
+                <div class="contact-box">
+                    <h4>Email Address</h4>
+                    <a href="mailto:methmagamage2005@gmail.com">methmagamage2005@gmail.com</a>
+                </div>
+                <div class="contact-box">
+                    <h4>Phone Number</h4>
+                    <p>070-3068560</p>
+                </div>
+                <div class="contact-box">
+                    <h4>Location</h4>
+                    <p>Matara, Sri Lanka</p>
+                </div>
+                <div class="contact-box">
+                    <h4>GitHub Profile</h4>
+                    <a href="https://github.com/methmagamage2005-dotcom" target="_blank">methmagamage2005-dotcom</a>
+                </div>
+            </div>
         </section>
 
     </div>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 e-Portfolio | Introduction to Information Technology (SC1172)</p>
+        <p>&copy; 2026 Methma Sithmini Senanayake | Introduction to Information Technology (SC1172) | SLIIT</p>
     </footer>
 
 </body>
